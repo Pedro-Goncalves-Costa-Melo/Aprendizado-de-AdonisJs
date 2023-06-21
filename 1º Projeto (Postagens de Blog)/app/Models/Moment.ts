@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon'
+
 import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Comment from './Comment'
 
@@ -18,9 +18,4 @@ export default class Moment extends BaseModel {
   @column()
   public image: string
 
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
 }
