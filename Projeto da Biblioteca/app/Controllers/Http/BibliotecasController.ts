@@ -3,26 +3,26 @@ import Biblioteca from 'App/Models/Biblioteca'
 
 export default class BibliotecasController {
 
-public async index(){
+    public async index() {
 
         const bibliotecas = await Biblioteca.all()
 
-        
-        return{
-            
+
+        return {
+
             mensagem: 'Essas são as bibliotecas existentes: ',
             data: bibliotecas
-            
+
         }
     }
 
-    public async store({request, response}:HttpContextContract){
+    public async store({ request, response }: HttpContextContract) {
         const dados = request.body()
 
         const biblioteca = await Biblioteca.create(dados)
 
         response.status(201)
-        return{
+        return {
             mensagem: 'Biblioteca criada com sucesso!',
             dados_da_biblioteca: biblioteca,
         }
