@@ -23,6 +23,6 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.group(() => {
 
   Route.resource('/livros', 'LivrosController').apiOnly()
-  Route.resource('/bibliotecas', 'BlibliotecasController').apiOnly()
+  Route.resource('/bibliotecas', 'BibliotecasController').apiOnly()
 
 }).prefix('/api')
