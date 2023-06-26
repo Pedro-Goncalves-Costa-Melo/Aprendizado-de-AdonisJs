@@ -7,13 +7,12 @@ export default class BibliotecasController {
 
         const bibliotecas = await Biblioteca.all()
 
+        return bibliotecas.map(biblioteca => {
+            return{
+                nome: biblioteca.Nome,
+            }
+        })
 
-        return {
-
-            mensagem: 'Essas são as bibliotecas existentes: ',
-            data: bibliotecas
-
-        }
     }
 
     public async store({ request, response }: HttpContextContract) {
