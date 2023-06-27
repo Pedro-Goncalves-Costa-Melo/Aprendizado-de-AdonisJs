@@ -42,4 +42,15 @@ export default class BibliotecasController {
         }
 
     }
+
+    public async show({params}: HttpContextContract){
+
+        const biblioteca = await Biblioteca.findOrFail(params.id)
+
+        return {
+            mensagem: 'Essa é a biblioteca com o Id pesquisado: ',
+            Informações: biblioteca
+        }
+
+    }
 }
