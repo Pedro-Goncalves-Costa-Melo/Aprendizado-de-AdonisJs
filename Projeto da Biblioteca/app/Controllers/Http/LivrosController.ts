@@ -17,7 +17,7 @@ export default class LivrosController {
 
     }
 
-    public async show({params}: HttpContextContract){
+    public async show({ params }: HttpContextContract) {
 
         const id = await Livro.findOrFail(params.id)
 
@@ -41,14 +41,14 @@ export default class LivrosController {
         }
     }
 
-    public async update({params, request}:HttpContextContract){
+    public async update({ params, request }: HttpContextContract) {
 
         const id_do_update = await Livro.findOrFail(params.id)
 
         const newData = request.body()
 
         id_do_update.Titulo = newData.Titulo
-        id_do_update.Autor= newData.Autor
+        id_do_update.Autor = newData.Autor
 
         await id_do_update.save()
 
@@ -59,13 +59,13 @@ export default class LivrosController {
 
     }
 
-    public async destroy({params}:HttpContextContract){
+    public async destroy({ params }: HttpContextContract) {
 
         const id = await Livro.findOrFail(params.id)
 
         await id.delete()
 
-        return{
+        return {
             mensagem: 'Livro Excluido com sucesso!',
             Dados: id,
         }

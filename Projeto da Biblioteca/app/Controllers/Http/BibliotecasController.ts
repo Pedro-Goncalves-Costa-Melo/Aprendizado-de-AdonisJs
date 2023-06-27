@@ -7,13 +7,13 @@ export default class BibliotecasController {
 
         const bibliotecas = await Biblioteca.all()
 
-        
+
         return bibliotecas.map(biblioteca => {
-        return{
-            Id: biblioteca.id,
-            Nome: biblioteca.Nome,
-            Endereco: biblioteca.Endereco,
-        }
+            return {
+                Id: biblioteca.id,
+                Nome: biblioteca.Nome,
+                Endereco: biblioteca.Endereco,
+            }
         })
 
     }
@@ -41,11 +41,11 @@ export default class BibliotecasController {
         }
     }
 
-    public async update({params, request}:HttpContextContract){
+    public async update({ params, request }: HttpContextContract) {
 
         const NovoDados = request.body()
 
-        const  dados = await Biblioteca.findOrFail(params.id)
+        const dados = await Biblioteca.findOrFail(params.id)
 
         dados.Nome = NovoDados.Nome
         dados.Endereco = NovoDados.Endereco
