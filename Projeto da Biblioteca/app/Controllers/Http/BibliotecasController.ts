@@ -9,12 +9,23 @@ export default class BibliotecasController {
 
         return bibliotecas
         // return bibliotecas.map(biblioteca => {
-            // return{
-            //     Id: biblioteca.id,
-            //     Nome: biblioteca.Nome,
-            //     Endereco: biblioteca.Endereco,
-            // }
+        // return{
+        //     Id: biblioteca.id,
+        //     Nome: biblioteca.Nome,
+        //     Endereco: biblioteca.Endereco,
+        // }
         //})
+
+    }
+
+    public async show({ params }: HttpContextContract) {
+
+        const biblioteca = await Biblioteca.findOrFail(params.id)
+
+        return {
+            mensagem: 'Essa é a biblioteca com o Id pesquisado: ',
+            Informações: biblioteca
+        }
 
     }
 
@@ -30,7 +41,26 @@ export default class BibliotecasController {
         }
     }
 
-    public async destroy({params}: HttpContextContract){
+    public async update({params, request}:HttpContextContract){
+
+        const NovoDados = request.body()
+
+        const  dados = await Biblioteca.findOrFail(params.id)
+
+        dados.Nome = NovoDados.Nome
+        dados.Endereco = NovoDados.Endereco
+
+        await dados.save()
+
+        return {
+            mensagem: 'Biblioteca atualizada com sucesso!',
+            dados: dados,
+        }
+
+
+    }
+
+    public async destroy({ params }: HttpContextContract) {
 
         const id = await Biblioteca.findOrFail(params.id)
 
@@ -43,14 +73,4 @@ export default class BibliotecasController {
 
     }
 
-    public async show({params}: HttpContextContract){
-
-        const biblioteca = await Biblioteca.findOrFail(params.id)
-
-        return {
-            mensagem: 'Essa é a biblioteca com o Id pesquisado: ',
-            Informações: biblioteca
-        }
-
-    }
 }
