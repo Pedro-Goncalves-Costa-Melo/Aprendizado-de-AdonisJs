@@ -59,4 +59,16 @@ export default class LivrosController {
 
     }
 
+    public async destroy({params}:HttpContextContract){
+
+        const id = await Livro.findOrFail(params.id)
+
+        await id.delete()
+
+        return{
+            mensagem: 'Livro Excluido com sucesso!',
+            Dados: id,
+        }
+    }
+
 }   
