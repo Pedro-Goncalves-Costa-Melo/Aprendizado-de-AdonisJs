@@ -7,14 +7,14 @@ export default class BibliotecasController {
 
         const bibliotecas = await Biblioteca.all()
 
-        return bibliotecas
-        // return bibliotecas.map(biblioteca => {
-        // return{
-        //     Id: biblioteca.id,
-        //     Nome: biblioteca.Nome,
-        //     Endereco: biblioteca.Endereco,
-        // }
-        //})
+        
+        return bibliotecas.map(biblioteca => {
+        return{
+            Id: biblioteca.id,
+            Nome: biblioteca.Nome,
+            Endereco: biblioteca.Endereco,
+        }
+        })
 
     }
 
