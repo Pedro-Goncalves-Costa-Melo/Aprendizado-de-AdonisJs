@@ -41,5 +41,22 @@ export default class LivrosController {
         }
     }
 
+    public async update({params, request}:HttpContextContract){
+
+        const id_do_update = await Livro.findOrFail(params.id)
+
+        const newData = request.body()
+
+        id_do_update.Titulo = newData.Titulo
+        id_do_update.Autor= newData.Autor
+
+        await id_do_update.save()
+
+        return {
+            mensagem: 'Livro atualizado com sucesso!',
+            dados: id_do_update,
+        }
+
+    }
 
 }   
