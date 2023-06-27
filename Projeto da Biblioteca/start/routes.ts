@@ -26,6 +26,6 @@ Route.group(() => {
 
   Route.resource('/bibliotecas', 'BibliotecasController').apiOnly()
 
-  Route.resource('pessoas', 'PessoasController').apiOnly()
+  Route.resource('/pessoas', 'PessoasController').apiOnly()
   
 }).prefix('/api')
