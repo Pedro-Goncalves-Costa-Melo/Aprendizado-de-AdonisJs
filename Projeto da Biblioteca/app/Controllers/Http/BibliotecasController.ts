@@ -7,11 +7,14 @@ export default class BibliotecasController {
 
         const bibliotecas = await Biblioteca.all()
 
-        return bibliotecas.map(biblioteca => {
-            return{
-                nome: biblioteca.Nome,
-            }
-        })
+        return bibliotecas
+        // return bibliotecas.map(biblioteca => {
+            // return{
+            //     Id: biblioteca.id,
+            //     Nome: biblioteca.Nome,
+            //     Endereco: biblioteca.Endereco,
+            // }
+        //})
 
     }
 
@@ -25,5 +28,18 @@ export default class BibliotecasController {
             mensagem: 'Biblioteca criada com sucesso!',
             dados_da_biblioteca: biblioteca,
         }
+    }
+
+    public async destroy({params}: HttpContextContract){
+
+        const id = await Biblioteca.findOrFail(params.id)
+
+        await id.delete()
+
+        return {
+            mensagem: 'Biblioteca excluida com sucesso',
+            Informações: id,
+        }
+
     }
 }
