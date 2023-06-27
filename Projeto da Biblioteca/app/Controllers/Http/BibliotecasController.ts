@@ -8,7 +8,7 @@ export default class BibliotecasController {
         const bibliotecas = await Biblioteca.all()
 
         return {
-            mensagem: 'deu certo',
+            mensagem: 'Essas são todas as bibliotecas Cadastradas até o momento: ',
             data: bibliotecas,
         }
 
