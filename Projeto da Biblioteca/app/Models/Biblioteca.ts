@@ -5,8 +5,8 @@ export default class Biblioteca extends BaseModel {
   public id: number
 
   @column()
-  public Nome: string
+  public nome: string
 
   @column()
-  public Endereco: string
+  public endereco: string
 }

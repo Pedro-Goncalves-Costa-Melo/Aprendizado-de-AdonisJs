@@ -10,8 +10,8 @@ export default class LivrosController {
         return livros.map(livro => {
             return {
                 Id: livro.id,
-                Titulo: livro.Titulo,
-                Autor: livro.Autor
+                Titulo: livro.titulo,
+                Autor: livro.autor
             }
         })
 
@@ -47,8 +47,8 @@ export default class LivrosController {
 
         const newData = request.body()
 
-        id_do_update.Titulo = newData.Titulo
-        id_do_update.Autor = newData.Autor
+        id_do_update.titulo = newData.titulo
+        id_do_update.autor = newData.autor
 
         await id_do_update.save()
 

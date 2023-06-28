@@ -5,9 +5,9 @@ export default class Livro extends BaseModel {
   public id: number
 
   @column()
-  public Titulo: string
+  public titulo: string
 
   @column()
-  public Autor: string
+  public autor: string
 
 }

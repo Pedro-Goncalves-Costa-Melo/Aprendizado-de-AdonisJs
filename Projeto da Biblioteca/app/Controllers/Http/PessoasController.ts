@@ -41,10 +41,10 @@ export default class PessoasController {
 
         const New_data = request.body()
 
-        Old_data_Id.Nome = New_data.Nome
-        Old_data_Id.Email = New_data.Email
-        Old_data_Id.CPF = New_data.CPF
-        Old_data_Id.Endereco = New_data.Endereco
+        Old_data_Id.nome = New_data.nome
+        Old_data_Id.email = New_data.email
+        Old_data_Id.cpf = New_data.cpf
+        Old_data_Id.endereco = New_data.endereco
 
         await Old_data_Id.save()
 

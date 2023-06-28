@@ -43,8 +43,8 @@ export default class BibliotecasController {
 
         const dados = await Biblioteca.findOrFail(params.id)
 
-        dados.Nome = NovoDados.Nome
-        dados.Endereco = NovoDados.Endereco
+        dados.nome = NovoDados.nome
+        dados.endereco = NovoDados.endereco
 
         await dados.save()
 
