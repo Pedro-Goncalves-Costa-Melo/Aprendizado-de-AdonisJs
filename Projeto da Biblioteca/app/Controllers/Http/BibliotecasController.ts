@@ -64,6 +64,7 @@ export default class BibliotecasController {
 
         return {
             mensagem: 'Biblioteca excluida com sucesso',
+            aviso: 'Todos os livros cadastrados nessa biblioteca foram deletados',
             Informações: id,
         }
 
