@@ -20,6 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+//Rotas Basicas
 Route.group(() => {
 
   Route.resource('/livros', 'LivrosController').apiOnly()
@@ -28,4 +29,11 @@ Route.group(() => {
 
   Route.resource('/pessoas', 'PessoasController').apiOnly()
   
+}).prefix('/api')
+
+//Rotas Adicionais
+Route.group(() => {
+
+  Route.get('/bibliotecas/:bibliotecaId/livros', 'LivrosController.LivrosPorIdBiblioteca')
+
 }).prefix('/api')

@@ -7,7 +7,7 @@ export default class LivrosController {
 
         const livro = await Livro.all();
 
-        return{
+        return {
             mensagem: 'Esses são todos os livros cadastrdos',
             livros: livro,
         }
@@ -66,6 +66,22 @@ export default class LivrosController {
             mensagem: 'Livro Excluido com sucesso!',
             Dados: id,
         }
+    }
+
+    public async LivrosPorIdBiblioteca({ params }: HttpContextContract) {
+
+        const { bibliotecaId } = params
+
+        const livros = await Livro.query().where('biblioteca_id', bibliotecaId)
+
+
+        return {
+            mensagem: 'Esses são os livros na biblioteca com o Id pesquisado: ',
+            livros: livros,
+
+
+        }
+
     }
 
 }   
