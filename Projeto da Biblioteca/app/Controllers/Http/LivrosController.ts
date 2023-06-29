@@ -98,9 +98,7 @@ export default class LivrosController {
 
         const livro = await Livro.findOrFail(livroId)
 
-        const bibliotecaDestino = await Biblioteca.findOrFail(bibliotecaDestinoId)
-        //O warning na "bibliotecaDestino" não causa nenhum problema ao codigo. Essa variavel serve apenas para verificar se o body foi passado corretamente
-
+        await Biblioteca.findOrFail(bibliotecaDestinoId)
 
         livro.bibliotecaId = bibliotecaDestinoId
 

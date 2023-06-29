@@ -1,4 +1,6 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+
+import Livro from './Livro'
 
 export default class Pessoa extends BaseModel {
   @column({ isPrimary: true })
@@ -15,4 +17,11 @@ export default class Pessoa extends BaseModel {
 
   @column()
   public endereco: string
+
+  @column()
+  public livroId: number
+
+  @belongsTo(() => Livro)
+  public livro: BelongsTo<typeof Livro>
+
 }

@@ -6,7 +6,6 @@ export default class extends BaseSchema {
   public async up() {
     this.schema.table(this.tableName, (table) => {
       table.integer('biblioteca_id').unsigned().notNullable().references('id').inTable('bibliotecas').onDelete('CASCADE');
-
     })
   }
 
