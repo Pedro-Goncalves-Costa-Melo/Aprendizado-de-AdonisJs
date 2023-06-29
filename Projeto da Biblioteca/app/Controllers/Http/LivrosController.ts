@@ -1,8 +1,10 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Livro from 'App/Models/Livro'
+import Biblioteca from 'App/Models/Biblioteca'
 
 export default class LivrosController {
 
+    //Função que retorna todos os livros cadastrados em todas as bibliotecas
     public async index() {
 
         const livro = await Livro.all();
@@ -14,6 +16,7 @@ export default class LivrosController {
 
     }
 
+    //Função que  mostra o livro por Id pesquisado
     public async show({ params }: HttpContextContract) {
 
         const id = await Livro.findOrFail(params.id)
@@ -25,6 +28,7 @@ export default class LivrosController {
 
     }
 
+    //Função que inclui um livro no sistema
     public async store({ request, response }: HttpContextContract) {
 
         const dados = request.body()
@@ -38,6 +42,7 @@ export default class LivrosController {
         }
     }
 
+    //Função para atualizar um livro específico
     public async update({ params, request }: HttpContextContract) {
 
         const id_do_update = await Livro.findOrFail(params.id)
@@ -56,6 +61,7 @@ export default class LivrosController {
 
     }
 
+    //Função para deletar um livro específico
     public async destroy({ params }: HttpContextContract) {
 
         const id = await Livro.findOrFail(params.id)
@@ -68,7 +74,8 @@ export default class LivrosController {
         }
     }
 
-    public async LivrosPorIdBiblioteca({ params }: HttpContextContract) {
+    //função que mostra Todos os livros que estão armazenados na biblioteca com o Id que foi informado na chamada HTTP
+    public async livrosPorIdBiblioteca({ params }: HttpContextContract) {
 
         const { bibliotecaId } = params
 
@@ -82,6 +89,27 @@ export default class LivrosController {
 
         }
 
+    }
+
+    //Função para transferir um livro de uma biblioteca para outra
+    public async transferir({ request }: HttpContextContract) {
+
+        const {livroId, bibliotecaDestinoId} = request.body()
+
+        const livro = await Livro.findOrFail(livroId)
+
+        const bibliotecaDestino = await Biblioteca.findOrFail(bibliotecaDestinoId)
+        //O warning na "bibliotecaDestino" não causa nenhum problema ao codigo. Essa variavel serve apenas para verificar se o body foi passado corretamente
+
+
+        livro.bibliotecaId = bibliotecaDestinoId
+
+        await livro.save()
+
+        return {
+            mensagem: 'O livro foi transferido para a biblioteca solicitada',
+            dados: livro,
+        }
     }
 
 }   

@@ -34,6 +34,8 @@ Route.group(() => {
 //Rotas Adicionais
 Route.group(() => {
 
-  Route.get('/bibliotecas/:bibliotecaId/livros', 'LivrosController.LivrosPorIdBiblioteca')
+  Route.get('/bibliotecas/:bibliotecaId/livros', 'LivrosController.livrosPorIdBiblioteca')
+
+  Route.post('/livros/transferir', 'LivrosController.transferir')
 
 }).prefix('/api')
