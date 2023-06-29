@@ -5,15 +5,12 @@ export default class LivrosController {
 
     public async index() {
 
-        const livros = await Livro.all()
+        const livro = await Livro.all();
 
-        return livros.map(livro => {
-            return {
-                Id: livro.id,
-                Titulo: livro.titulo,
-                Autor: livro.autor
-            }
-        })
+        return{
+            mensagem: 'Esses são todos os livros cadastrdos',
+            livros: livro,
+        }
 
     }
 
