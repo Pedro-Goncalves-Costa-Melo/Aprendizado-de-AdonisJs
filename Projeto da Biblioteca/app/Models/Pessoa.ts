@@ -1,4 +1,4 @@
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, HasOne, belongsTo, column, hasOne } from '@ioc:Adonis/Lucid/Orm'
 
 import Livro from './Livro'
 
@@ -23,5 +23,8 @@ export default class Pessoa extends BaseModel {
 
   @belongsTo(() => Livro)
   public livro: BelongsTo<typeof Livro>
+
+  @hasOne(() => Livro)
+  public livro_emprestado: HasOne<typeof Livro>
 
 }

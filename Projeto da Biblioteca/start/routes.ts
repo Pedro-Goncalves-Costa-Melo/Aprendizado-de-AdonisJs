@@ -34,8 +34,12 @@ Route.group(() => {
 //Rotas Adicionais
 Route.group(() => {
 
+  //Rota para mostrar todos os livros em uma biblioteca
   Route.get('/bibliotecas/:bibliotecaId/livros', 'LivrosController.livrosPorIdBiblioteca')
 
+  //Transferencia de um livro de uma biblioteca para outra
   Route.post('/livros/transferir', 'LivrosController.transferir')
 
+  //Emprestimo de livro para um usuário
+  Route.patch('/pessoas/:pessoaId/livros/:livroId', 'PessoasController.emprestarlivro')
 }).prefix('/api')

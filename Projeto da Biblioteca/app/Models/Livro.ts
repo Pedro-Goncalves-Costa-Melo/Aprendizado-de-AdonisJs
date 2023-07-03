@@ -15,6 +15,9 @@ export default class Livro extends BaseModel {
   @column()
   public bibliotecaId: number
 
+  @column({ columnName: 'emprestado' })
+  public emprestado: boolean
+
   @belongsTo(() => Biblioteca)
   public biblioteca: BelongsTo<typeof Biblioteca>
 
