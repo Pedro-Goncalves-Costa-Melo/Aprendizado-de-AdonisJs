@@ -1,6 +1,6 @@
 # Aprendizado-de-AdonisJs
 
-## Repositório que armazena meu processo de aprendizado para AdonisJs, incluindo os aprendizados em Js e nodeJs
+## Repositório que armazena meu processo de aprendizado para AdonisJs.
 
 O Processo seletivo da EmakerJr, Empresa jr. da UFLA, requisitou um projeto desenvolvido em AdonisJs.
 Como eu nunca tive contato anteriormente com JavaScript e muito Menos com NodeJs, foi preciso começar do 0.
