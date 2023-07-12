@@ -96,4 +96,34 @@ export default class PessoasController {
         }
 
     }
+
+    //Função para um usuário devolver um livro
+    public async devolverlivro({ params }: HttpContextContract) {
+
+        const {pessoaId, livroId} = params;
+
+        const pessoa = await Pessoa.findOrFail(pessoaId);
+
+        if(!pessoa.livroId){
+            return {
+                ERRO: 'Essa pessoa não possui um livro para ser devolvido',
+            }
+        }
+
+        const livro = await Livro.query().where('id',livroId).andWhere('emprestado',true).firstOrFail();
+
+        livro.emprestado = false
+        await livro.save();
+
+        pessoa.livroId = 0;
+        await pessoa.save();
+        
+        return {
+
+            mensagem: 'deu certo',
+
+        }
+
+        
+    }
 }
