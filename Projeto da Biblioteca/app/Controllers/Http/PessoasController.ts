@@ -82,7 +82,7 @@ export default class PessoasController {
             }
         }
 
-        if (pessoa.livroId != 0) {
+        if (pessoa.livroId != null) {
             return {
                 mensagem: 'Este usuário já possui um livro'
             }
@@ -103,9 +103,10 @@ export default class PessoasController {
     //Função para um usuário devolver um livro
     public async devolverLivro({ params }: HttpContextContract) {
 
-        const pessoa = await Pessoa.findOrFail(params)
+        const pessoa = await Pessoa.findOrFail(params.pessoaId)
 
-        if (pessoa.livroId == 0) {
+
+        if (pessoa.livroId == null) {
             return {
                 mensagem: 'Este usuario não possui um livro emprestado'
             }
@@ -116,8 +117,7 @@ export default class PessoasController {
         livro.emprestado = false
         await livro.save()
 
-        //Como definir que a pessoa tem ou não um livro emprestado?
-        pessoa.livroId = 0
+        pessoa.livroId = -1
         await pessoa.save()
 
         return {

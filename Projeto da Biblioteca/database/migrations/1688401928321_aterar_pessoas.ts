@@ -5,13 +5,13 @@ export default class UpdatePessoasTable extends BaseSchema {
 
   public async up() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.integer('livro_id').unsigned().references('livros.id').nullable().alter();
+      table.integer('livro_id').references('livros.id').nullable().alter();
     });
   }
 
   public async down() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.integer('livro_id').unsigned().references('livros.id').notNullable().alter();
+      table.integer('livro_id').references('livros.id').nullable().alter();
     });
   }
 }
