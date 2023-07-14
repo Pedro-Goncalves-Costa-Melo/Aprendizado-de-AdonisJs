@@ -39,7 +39,7 @@ export default class BibliotecasController {
 
     public async update({ params, request }: HttpContextContract) {
 
-        const NovoDados = request.body()
+        const NovoDados = request.only(['nome', 'endereco'])
 
         const dados = await Biblioteca.findOrFail(params.id)
 

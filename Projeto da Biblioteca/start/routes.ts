@@ -41,8 +41,8 @@ Route.group(() => {
   Route.post('/livros/transferir', 'LivrosController.transferir')
 
   //Emprestimo de livro para um usuário
-  Route.patch('/pessoas/:pessoaId/livros/:livroId/pegar', 'PessoasController.emprestarlivro')
+  Route.patch('/pessoas/:pessoaId/:livroId/emprestimo', 'PessoasController.emprestarLivro')
 
   //Devolução de um livro
-  Route.patch('pessoas/:pessoaId/livros/:livroId/devolver', 'PessoasController.devolverlivro')
+  Route.patch('pessoas/:pessoaId/devolver', 'PessoasController.devolverLivro')
 }).prefix('/api')

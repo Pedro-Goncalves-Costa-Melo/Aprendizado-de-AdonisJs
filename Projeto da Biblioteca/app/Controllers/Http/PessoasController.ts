@@ -69,61 +69,59 @@ export default class PessoasController {
     }
 
     //Função para um usuário pegar um livro emprestado
-    public async emprestarlivro({ params }: HttpContextContract) {
+    public async emprestarLivro({ params }: HttpContextContract) {
+        const { pessoaId, livroId } = params
 
-        const { pessoaId, livroId } = params;
+        const pessoa = await Pessoa.findOrFail(pessoaId)
 
+        const livro = await Livro.findOrFail(livroId)
 
-        const pessoa = await Pessoa.findOrFail(pessoaId);
-
-        if (pessoa.livroId) {
+        if (livro.emprestado) {
             return {
-                mensagem: 'Este usuário já possui um livro',
+                mensagem: 'Este livro já está emprestado'
             }
         }
 
-        const livro = await Livro.query().where('id', livroId).andWhere('emprestado', false).firstOrFail();
-
-        livro.emprestado = true;
-        pessoa.livroId = livroId;
-        await livro.save();
-        await pessoa.save();
-
-        return {
-            mensagem: 'livro emprestado com sucesso',
-            pessoa: pessoa,
-            livro: livro,
+        if (pessoa.livroId != 0) {
+            return {
+                mensagem: 'Este usuário já possui um livro'
+            }
         }
 
+        livro.emprestado = true
+        await livro.save()
+
+        pessoa.livroId = livro.id
+        await pessoa.save()
+
+        return {
+            message: 'Livro emprestado com sucesso',
+        }
     }
 
+
     //Função para um usuário devolver um livro
-    public async devolverlivro({ params }: HttpContextContract) {
+    public async devolverLivro({ params }: HttpContextContract) {
 
-        const {pessoaId, livroId} = params;
+        const pessoa = await Pessoa.findOrFail(params)
 
-        const pessoa = await Pessoa.findOrFail(pessoaId);
-
-        if(!pessoa.livroId){
+        if (pessoa.livroId == 0) {
             return {
-                ERRO: 'Essa pessoa não possui um livro para ser devolvido',
+                mensagem: 'Este usuario não possui um livro emprestado'
             }
         }
 
-        const livro = await Livro.query().where('id',livroId).andWhere('emprestado',true).firstOrFail();
+        const livro = await Livro.findOrFail(pessoa.livroId)
 
         livro.emprestado = false
-        await livro.save();
+        await livro.save()
 
-        pessoa.livroId = 0;
-        await pessoa.save();
-        
+        //Como definir que a pessoa tem ou não um livro emprestado?
+        pessoa.livroId = 0
+        await pessoa.save()
+
         return {
-
-            mensagem: 'deu certo',
-
+            mensagem: 'Devolução executada com sucesso!'
         }
-
-        
     }
 }
