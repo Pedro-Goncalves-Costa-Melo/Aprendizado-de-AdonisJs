@@ -19,7 +19,7 @@ export default class Pessoa extends BaseModel {
   public endereco: string
 
   @column()
-  public livroId: number
+  public livro_id: string
 
   @belongsTo(() => Livro)
   public livro: BelongsTo<typeof Livro>

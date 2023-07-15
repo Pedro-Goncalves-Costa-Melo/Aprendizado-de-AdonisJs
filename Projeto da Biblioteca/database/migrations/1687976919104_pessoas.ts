@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('email').notNullable()
       table.string('cpf').notNullable()
       table.string('endereco').notNullable()
-      table.string('livroId').nullable()
+      table.string('livro_id').nullable()
     })
   }
 

@@ -69,59 +69,71 @@ export default class PessoasController {
     }
 
     //Função para um usuário pegar um livro emprestado
-    public async emprestarLivro({ params }: HttpContextContract) {
-        const { pessoaId, livroId } = params
+    public async emprestar({ params }: HttpContextContract) {
+
+        const { pessoaId, livro_id } = params
 
         const pessoa = await Pessoa.findOrFail(pessoaId)
+        const livro = await Livro.findOrFail(livro_id)
 
-        const livro = await Livro.findOrFail(livroId)
+
+        if (pessoa.livro_id != "0") {
+            return {
+                mensagem: 'Essa pessoa já possui um livro'
+            }
+        }
 
         if (livro.emprestado) {
             return {
-                mensagem: 'Este livro já está emprestado'
+                mensagem: 'Esse livro já está emprestado'
             }
         }
 
-        if (pessoa.livroId != null) {
-            return {
-                mensagem: 'Este usuário já possui um livro'
-            }
-        }
 
         livro.emprestado = true
         await livro.save()
 
-        pessoa.livroId = livro.id
+        pessoa.livro_id = livro_id
         await pessoa.save()
 
         return {
-            message: 'Livro emprestado com sucesso',
+            mensagem: 'Livro emprestado com sucesso!'
         }
+
     }
 
 
     //Função para um usuário devolver um livro
-    public async devolverLivro({ params }: HttpContextContract) {
+    public async devolver({ params }: HttpContextContract) {
 
-        const pessoa = await Pessoa.findOrFail(params.pessoaId)
+        const { pessoaId, livro_id } = params
 
+        const pessoa = await Pessoa.findOrFail(pessoaId)
 
-        if (pessoa.livroId == null) {
-            return {
-                mensagem: 'Este usuario não possui um livro emprestado'
+        const livro = await Livro.findOrFail(livro_id)
+
+        if (!livro.emprestado) {
+            return{
+                mensagem: 'Este livro não está emprestado'
             }
         }
-
-        const livro = await Livro.findOrFail(pessoa.livroId)
+        
+        if (pessoa.livro_id == '0') {
+            return{
+                mensagem: 'Este usuário não possui um livro emprestado'
+            }
+        }
 
         livro.emprestado = false
         await livro.save()
 
-        pessoa.livroId = -1
+        pessoa.livro_id = '0'
         await pessoa.save()
 
-        return {
-            mensagem: 'Devolução executada com sucesso!'
+        return{
+            mensagem: 'Devolução feita com sucesso'
         }
+
     }
+
 }
